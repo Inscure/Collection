@@ -8,7 +8,7 @@ Objective implementation of arrays in PHP
 ```json
 {
     "require": {
-        "inscure/collection": "1.0.3"
+        "inscure/collection": "1.2.1"
     }
 }
 ```
