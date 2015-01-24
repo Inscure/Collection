@@ -1,6 +1,18 @@
 # Collection
 Objective implementation of arrays in PHP
 
+# Installation
+
+## Composer
+
+``
+{
+    "require": {
+        "inscure/collection": "1.0.3"
+    }
+}
+``
+
 # Usages
 
 ```php
