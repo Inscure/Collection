@@ -33,4 +33,9 @@ class Collection extends CollectionAbstract
         
         return $this;
     }
+    
+    public function getAll()
+    {
+        return $this->items;
+    }
 }

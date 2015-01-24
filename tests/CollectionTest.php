@@ -2,6 +2,9 @@
 
 class CollectionTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Collection\Collection
+     */
     private $array;
     
     public function setUp() 
