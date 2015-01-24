@@ -30,6 +30,14 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->assertSame(1, $this->array->get(0));
     }
     
+    /**
+     * @expectedException \Exception
+     */
+    public function testGetterException()
+    {
+        $this->array->get('id');
+    }
+    
     public function testRemoving()
     {
         $this->array->remove(0);
