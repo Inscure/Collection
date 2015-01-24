@@ -22,7 +22,9 @@ Objective implementation of arrays in PHP
 
 $array = new Collection\Collection(array(1, 2, 3, 4, 5));
 
-echo count($array); // 5
+echo $array->get(4); // 5 
+
+echo count($array);  // 5
 
 foreach($array as $key => $value) {
     echo $key . '=>' . $value . '<br />';
