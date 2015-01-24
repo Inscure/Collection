@@ -41,11 +41,11 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     {
         $this->assertCount(1, $this->array);
         
-        $this->array->set(0, 0);
+        $this->array->set('set', 0);
         
         $this->assertCount(2, $this->array);
         
-        $this->array->set(0, 0);
+        $this->array->set('set', false);
         
         $this->assertCount(2, $this->array);
     }
