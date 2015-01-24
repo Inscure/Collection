@@ -5,13 +5,13 @@ Objective implementation of arrays in PHP
 
 ## Composer
 
-``
+```json
 {
     "require": {
         "inscure/collection": "1.0.3"
     }
 }
-``
+```
 
 # Usages
 
