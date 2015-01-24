@@ -2,68 +2,35 @@
 
 namespace Collection;
 
-class Collection implements \Countable, \ArrayAccess, \Iterator
+use Collection\CollectionAbstract;
+
+class Collection extends CollectionAbstract
 {
-    protected $items = array();
-    
-    protected $pointer = 0;
-    
-    public function __construct(array $items) 
+    public function set($key, $value)
     {
-        $this->items = $items;
-    }
-    
-    public function count()
-    {
-        return count($this->items);
-    }
-    
-    public function offsetSet($offset, $value) 
-    {
-        $this->items[$offset] = $value;
-    }
-    
-    public function offsetGet($offset) 
-    {
-        return $this->items[$offset];
-    }
-    
-    public function offsetExists($offset) 
-    {
-        return array_key_exists($offset, $this->items);
-    }
-    
-    public function offsetUnset($offset) 
-    {
-        unset($this->items[$offset]);
-    }
-    
-    public function current()
-    {
-        $values = array_values($this->items);
+        $this->offsetSet($key, $value);
         
-        return $values[$this->pointer];
+        return $this;
     }
     
-    public function key()
+    public function get($key) 
     {
-        $keys = array_keys($this->items);
+        if (! $this->has($key)) {
+            throw new \Exception('Próba pobrania elementu, który nie istnieje.');
+        }
         
-        return $keys[$this->pointer];
+        return $this->items[$key];
     }
     
-    public function valid()
+    public function has($key)
     {
-        return $this->pointer < $this->count();
+        return $this->offsetExists($key);
     }
     
-    public function next() 
+    public function remove($key)
     {
-        $this->pointer++;
-    }
-    
-    public function rewind()
-    {
-        $this->pointer = 0;
+        $this->offsetUnset($key);
+        
+        return $this;
     }
 }

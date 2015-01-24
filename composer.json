@@ -1,12 +1,15 @@
 {
     "name": "inscure/collection",
+    "license": "MIT",
     "authors": [
         {
             "name": "Paweł Zegardło",
             "email": "pawel.zegardlo@gmail.com"
         }
     ],
-    "license": "MIT",
+    "require-dev": {
+        "phpunit/phpunit": "4.4.4"
+    },
     "autoload": {
         "psr-4": {
             "Collection\\": "src"
