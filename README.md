@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Inscure/Collection.svg?branch=master)](https://travis-ci.org/Inscure/Collection)
+
 # Collection
 Objective implementation of arrays in PHP
 
