@@ -6,21 +6,33 @@ abstract class CollectionAbstract implements \Countable, \ArrayAccess, \Iterator
 {
     protected $items = array();
     
+    protected $count;
+    
+    protected $last_item_key;
+    
     protected $pointer = 0;
+    
+    const INCREMENT = 1;
+    
+    const DECREMENT = 2;
     
     public function __construct(array $items = array()) 
     {
         $this->items = $items;
+        
+        $this->count = count($items);
     }
     
     public function count()
     {
-        return count($this->items);
+        return $this->count;
     }
     
     public function offsetSet($offset, $value) 
     {
         $this->items[$offset] = $value;
+        
+        $this->updateCounter(self::INCREMENT);
     }
     
     public function offsetGet($offset) 
@@ -36,6 +48,8 @@ abstract class CollectionAbstract implements \Countable, \ArrayAccess, \Iterator
     public function offsetUnset($offset) 
     {
         unset($this->items[$offset]);
+        
+        $this->updateCounter(self::DECREMENT);
     }
     
     public function current()
@@ -65,5 +79,22 @@ abstract class CollectionAbstract implements \Countable, \ArrayAccess, \Iterator
     public function rewind()
     {
         $this->pointer = 0;
+    }
+    
+    protected function updateCounter($type)
+    {
+        if ($type == self::INCREMENT) {
+            $this->count++;
+        } elseif ($type == self::DECREMENT) {
+            $this->count--;
+        }
+        
+        if ($this->count == 0) {
+            $this->last_item_key = null;
+        } else {
+            $this->last_item_key = array_keys($this->items)[0];
+        }
+        
+        throw new \Exception('Wrong parameter for counter updating.');
     }
 }
