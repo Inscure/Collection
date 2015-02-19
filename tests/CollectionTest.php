@@ -69,5 +69,11 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $this->collection->remove('foo');
         
         $this->assertSame(1, $this->collection->getLast());
+        
+        $this->setExpectedException('\Exception');
+        
+        $this->collection->remove(0);
+        
+        $this->collection->getLast();
     }
 }
