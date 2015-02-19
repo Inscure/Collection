@@ -5,29 +5,29 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     /**
      * @var \Collection\Collection
      */
-    private $array;
+    private $collection;
     
     public function setUp() 
     {
-        $this->array = new \Collection\Collection;
+        $this->collection = new \Collection\Collection;
         
-        $this->array->set(0, 1);
+        $this->collection->set(0, 1);
     }
     
     public function testSetter()
     {
-        $this->assertSame(1, $this->array[0]);
+        $this->assertSame(1, $this->collection[0]);
         
-        $this->array->set('test', 5);
+        $this->collection->set('test', 5);
         
-        $this->assertSame(5, $this->array['test']);
+        $this->assertSame(5, $this->collection['test']);
         
-        $this->assertCount(2, $this->array);
+        $this->assertCount(2, $this->collection);
     }
     
     public function testGetter()
     {
-        $this->assertSame(1, $this->array->get(0));
+        $this->assertSame(1, $this->collection->get(0));
     }
     
     /**
@@ -35,27 +35,39 @@ class CollectionTest extends PHPUnit_Framework_TestCase
      */
     public function testGetterException()
     {
-        $this->array->get('id');
+        $this->collection->get('id');
     }
     
     public function testRemoving()
     {
-        $this->array->remove(0);
+        $this->collection->remove(0);
         
-        $this->assertCount(0, $this->array);
+        $this->assertCount(0, $this->collection);
     }
     
     public function testCount()
     {
-        $this->assertCount(1, $this->array);
+        $this->assertCount(1, $this->collection);
         
-        $this->array->set('set', 0);
+        $this->collection->set('set', 0);
         
-        $this->assertCount(2, $this->array);
+        $this->assertCount(2, $this->collection);
         
-        $this->array->set('set', false);
+        $this->collection->set('set', false);
         
-        $this->assertCount(2, $this->array);
+        $this->assertCount(2, $this->collection);
     }
     
+    public function testLastItemValue()
+    {
+        $this->assertSame(1, $this->collection->getLast());
+        
+        $this->collection->set('foo', 'value');
+        
+        $this->assertSame('value', $this->collection->getLast());
+        
+        $this->collection->remove('foo');
+        
+        $this->assertSame(1, $this->collection->getLast());
+    }
 }

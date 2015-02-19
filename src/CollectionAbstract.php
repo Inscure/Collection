@@ -30,9 +30,13 @@ abstract class CollectionAbstract implements \Countable, \ArrayAccess, \Iterator
     
     public function offsetSet($offset, $value) 
     {
+        $has = $this->offsetExists($offset);
+        
         $this->items[$offset] = $value;
         
-        $this->updateCounter(self::INCREMENT);
+        if (! $has) {
+            $this->updateCounter(self::INCREMENT);
+        }
     }
     
     public function offsetGet($offset) 
@@ -87,14 +91,14 @@ abstract class CollectionAbstract implements \Countable, \ArrayAccess, \Iterator
             $this->count++;
         } elseif ($type == self::DECREMENT) {
             $this->count--;
+        } else {
+            throw new \Exception('Wrong parameter for counter updating.');
         }
         
         if ($this->count == 0) {
             $this->last_item_key = null;
         } else {
-            $this->last_item_key = array_keys($this->items)[0];
+            $this->last_item_key = array_keys($this->items)[$this->count() - 1];
         }
-        
-        throw new \Exception('Wrong parameter for counter updating.');
     }
 }
