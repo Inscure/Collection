@@ -60,15 +60,18 @@ class CollectionTest extends PHPUnit_Framework_TestCase
     
     public function testLastItemValue()
     {
-        $this->assertSame(1, $this->collection->getLast());
+        $last = $this->collection->getLast();
+        
+        $this->assertSame(1, $last->getValue());
+        $this->assertSame(0, $last->getKey());
         
         $this->collection->set('foo', 'value');
         
-        $this->assertSame('value', $this->collection->getLast());
+        $this->assertSame('foo', $this->collection->getLast()->getKey());
         
         $this->collection->remove('foo');
         
-        $this->assertSame(1, $this->collection->getLast());
+        $this->assertSame(1, $this->collection->getLast()->getValue());
         
         $this->setExpectedException('\Exception');
         

@@ -39,10 +39,14 @@ class Collection extends CollectionAbstract
         return $this->items;
     }
     
+    /**
+     * @return \Collection\Item
+     * @throws \Exception
+     */
     public function getLast()
     {
         if ($this->count() > 0) {
-            return $this->items[$this->last_item_key];
+            return new Item($this->last_item_key, $this->items[$this->last_item_key]);
         }
         
         throw new \Exception('Collection is empty.');
